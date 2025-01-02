@@ -1,0 +1,42 @@
+% Facts about symptoms for various conditions
+has_symptom(john, fever).
+has_symptom(john, cough).
+has_symptom(john, sore_throat).
+
+has_symptom(mary, headache).
+has_symptom(mary, fever).
+has_symptom(mary, body_aches).
+
+has_symptom(bob, nausea).
+has_symptom(bob, vomiting).
+has_symptom(bob, abdominal_pain).
+
+has_symptom(alice, rash).
+has_symptom(alice, fever).
+has_symptom(alice, headache).
+
+% Rules to diagnose based on symptoms
+diagnose(Person, 'Cold') :-
+    has_symptom(Person, cough),
+    has_symptom(Person, sore_throat),
+    has_symptom(Person, fever).
+
+diagnose(Person, 'Flu') :-
+    has_symptom(Person, fever),
+    has_symptom(Person, headache),
+    has_symptom(Person, body_aches).
+
+diagnose(Person, 'Food Poisoning') :-
+    has_symptom(Person, nausea),
+    has_symptom(Person, vomiting),
+    has_symptom(Person, abdominal_pain).
+
+diagnose(Person, 'Measles') :-
+    has_symptom(Person, rash),
+    has_symptom(Person, fever),
+    has_symptom(Person, headache).
+
+% Query rule to provide a diagnosis
+get_diagnosis(Person, Diagnosis) :-
+    diagnose(Person, Diagnosis),
+    write(Person), write(' is diagnosed with '), write(Diagnosis), nl.
